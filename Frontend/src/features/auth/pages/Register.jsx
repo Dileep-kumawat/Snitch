@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useAuth } from "../hook/useAuth"
-import { useNavigate } from 'react-router';
+import { Link, useNavigate } from 'react-router';
 
 const Register = () => {
 
@@ -148,6 +148,10 @@ const Register = () => {
                             <label htmlFor="isSeller" className="text-sm text-[#e5e2e1] group-hover:text-[#FFD700] cursor-pointer select-none transition-colors duration-300">Register as Seller</label>
                         </div>
 
+                        <a href="/api/auth/google"
+                            className="text-sm underline text-[#e5e2e1] group-hover:text-[#FFD700] cursor-pointer select-none transition-colors duration-300"
+                        >Continue with Google</a>
+
                         {/* Submit Button */}
                         <button
                             type="submit"
@@ -157,9 +161,9 @@ const Register = () => {
                         </button>
 
                         <div className="text-center mt-6">
-                            <a href="/login" className="text-sm text-[#999077] hover:text-[#FFD700] transition-colors border-b border-transparent hover:border-[#FFD700] py-0.5">
+                            <Link to="/login" className="text-sm text-[#999077] hover:text-[#FFD700] transition-colors border-b border-transparent hover:border-[#FFD700] py-0.5">
                                 Already have an account? Sign in
-                            </a>
+                            </Link>
                         </div>
                     </form>
                 </div>
