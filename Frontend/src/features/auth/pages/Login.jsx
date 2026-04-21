@@ -7,21 +7,25 @@ const Login = () => {
     const { handleLogin } = useAuth();
     const navigate = useNavigate();
 
-    const [formData, setFormData] = useState({
+    const [ formData, setFormData ] = useState({
         email: '',
         password: ''
     });
 
     const handleChange = (e) => {
         const { name, value } = e.target;
-        setFormData(prev => ({ ...prev, [name]: value }));
+        setFormData(prev => ({ ...prev, [ name ]: value }));
     };
 
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            await handleLogin({ email: formData.email, password: formData.password });
-            navigate("/");
+            const user = await handleLogin({ email: formData.email, password: formData.password });
+            if (user.role == "buyer") {
+                navigate("/");
+            } else if (user.role == "seller") {
+                navigate("/seller/dashboard");
+            }
         } catch (error) {
             console.error("Login failed", error);
         }
@@ -42,15 +46,15 @@ const Login = () => {
                 {/* ── LEFT: Editorial Image Panel ── */}
                 <div className="hidden lg:flex lg:w-1/2 relative overflow-hidden" style={{ backgroundColor: '#f5f3f0' }}>
                     <img
-                        src="/snitch_editorial.png"
+                        src="/snitch_editorial_warm.png"
                         alt="Snitch Fashion Editorial"
-                        className="absolute inset-0 w-full h-full object-cover"
-                        style={{ filter: 'sepia(20%) brightness(0.92)' }}
+                        className="absolute inset-0 w-full h-full object-cover object-top"
+                        style={{ filter: 'brightness(0.97)' }}
                     />
                     {/* Subtle warm overlay */}
                     <div
                         className="absolute inset-0"
-                        style={{ background: 'linear-gradient(to top, rgba(27,24,20,0.45) 0%, rgba(27,24,20,0.05) 50%, transparent 100%)' }}
+                        style={{ background: 'linear-gradient(to top, rgba(27,24,20,0.62) 0%, rgba(27,24,20,0.08) 45%, transparent 100%)' }}
                     />
                     <div className="absolute inset-0 p-14 flex flex-col justify-between z-10">
                         {/* Brand */}

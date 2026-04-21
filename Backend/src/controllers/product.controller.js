@@ -12,7 +12,8 @@ export async function createProduct(req, res) {
             buffer: file.buffer,
             fileName: file.originalname
         })
-    }));
+    }))
+
 
     const product = await productModel.create({
         title,
@@ -23,13 +24,14 @@ export async function createProduct(req, res) {
         },
         images,
         seller: seller._id
-    });
+    })
+
 
     res.status(201).json({
         message: "Product created successfully",
         success: true,
         product
-    });
+    })
 }
 
 export async function getSellerProducts(req, res) {
@@ -37,9 +39,20 @@ export async function getSellerProducts(req, res) {
 
     const products = await productModel.find({ seller: seller._id });
 
+
     res.status(200).json({
         message: "Products fetched successfully",
         success: true,
         products
-    });
+    })
+}
+
+export async function getAllProducts(req, res) {
+    const products = await productModel.find()
+
+    return res.status(200).json({
+        message: "Products fetched successfully",
+        success: true,
+        products
+    })
 }

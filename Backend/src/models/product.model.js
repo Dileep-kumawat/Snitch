@@ -1,5 +1,6 @@
 import mongoose from 'mongoose';
 
+
 const productSchema = new mongoose.Schema({
     title: {
         type: String,
@@ -11,7 +12,7 @@ const productSchema = new mongoose.Schema({
     },
     seller: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'user',
+        ref: 'user',    
         required: true
     },
     price: {
@@ -21,7 +22,7 @@ const productSchema = new mongoose.Schema({
         },
         currency: {
             type: String,
-            enum: ["USD", "EUR", "GBP", "JPY", "INR"],
+            enum: [ "USD", "EUR", "GBP", "JPY", "INR" ],
             default: "INR"
         }
     },
@@ -33,7 +34,8 @@ const productSchema = new mongoose.Schema({
             }
         }
     ]
-}, { timestamps: true });
+}, { timestamps: true })
+
 
 const productModel = mongoose.model('product', productSchema);
 

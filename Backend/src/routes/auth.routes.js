@@ -1,17 +1,22 @@
-import { Router } from 'express';
-import { validateLoginUser, validateRegisterUser } from '../validators/auth.validator.js';
-import { googleCallback, login, register } from '../controllers/auth.controller.js';
-import passport from 'passport';
-import { config } from '../config/config.js';
+import { Router } from "express";
+import { validateRegisterUser, validateLoginUser } from "../validator/auth.validator.js";
+import { getMe, googleCallback, login, register } from "../controllers/auth.controller.js";
+import passport from "passport";
+import { config } from "../config/config.js";
+import { authenticateUser } from "../middlewares/auth.middleware.js";
 
 const router = Router();
 
-router.post('/register', validateRegisterUser, register);
 
-router.post('/login', validateLoginUser, login);
 
-router.get('/google',
-    passport.authenticate("google", { scope: ["profile", "email"] }));
+router.post('/register', validateRegisterUser, register)
+
+router.post("/login", validateLoginUser, login)
+
+
+// /api/auth/google
+router.get("/google",
+    passport.authenticate("google", { scope: [ "profile", "email" ] }))
 
 router.get("/google/callback",
     passport.authenticate("google", {
@@ -20,5 +25,13 @@ router.get("/google/callback",
     }),
     googleCallback,
 )
+
+
+/**
+ * @route GET /api/auth/me
+ * @description Get the authenticated user's profile
+ * @access Private
+ */
+router.get('/me', authenticateUser, getMe)
 
 export default router;
