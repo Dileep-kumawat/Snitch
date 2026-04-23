@@ -37,5 +37,5 @@ export const useProduct = () => {
     }
 
     return { handleCreateProduct, handleGetSellerProduct, handleGetAllProducts, handleGetProductById ,handleAddProductVariant}
-    
+
 }

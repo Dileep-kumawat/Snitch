@@ -408,4 +408,4 @@ const SellerProductDetails = () => {
   )
 }
 
-export default SellerProductDetails;
+export default SellerProductDetails

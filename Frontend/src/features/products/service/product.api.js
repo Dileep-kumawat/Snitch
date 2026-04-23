@@ -28,6 +28,8 @@ export async function getProductById(productId) {
 
 export async function addProductVariant(productId, newProductVariant) {
 
+    console.log(newProductVariant)
+
     const formData = new FormData()
 
     newProductVariant.images.forEach((image) => {
